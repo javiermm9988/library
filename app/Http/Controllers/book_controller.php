@@ -29,9 +29,13 @@ class book_controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        //Aqui creo un libro
+        $books = new book();
+        $books->title = $request->title;
+        $books->description = $request->description;
+        $books->save();
     }
 
     /**
