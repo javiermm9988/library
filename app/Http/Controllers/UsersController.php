@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\user;
+use firebase\JWT\JWT;
 
 class UsersController extends Controller
 {
@@ -34,7 +36,21 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+
+        $key = "lbdfbsF>FHsdF<fgsfugsfs¡'df564asdljfs";
+
+        $data_token = [
+            "email" => $user->email,
+            "password" => $user->password
+        ];
+
+        $token = JWT::encode($data_token, $key);
+
     }
 
     /**
