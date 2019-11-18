@@ -31,11 +31,7 @@ class book_controller extends Controller
      */
     public function create(Request $request)
     {
-        //Aqui creo un libro
-        $books = new book();
-        $books->title = $request->title;
-        $books->description = $request->description;
-        $books->save();
+       
     }
 
     /**
@@ -46,7 +42,11 @@ class book_controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+         //Aqui creo un libro
+         $books = new book();
+         $books->title = $request->title;
+         $books->description = $request->description;
+         $books->save();
     }
 
     /**

@@ -4,10 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\user;
-use firebase\JWT\JWT;
+use Firebase\JWT\JWT;
 
 class UsersController extends Controller
 {
+
+    private $key = "lbdfbsF>FHsdF<fgsfugsfs¡'df564asdljfs";
+
+    public function login(Request $request)
+    {
+
+    }
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -37,20 +48,18 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $user = new user();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
-
-        $key = "lbdfbsF>FHsdF<fgsfugsfs¡'df564asdljfs";
+        $user->register($request);
 
         $data_token = [
-            "email" => $user->email,
-            "password" => $user->password
+            "email" => $user->email
         ];
 
-        $token = JWT::encode($data_token, $key);
+        $token = JWT::encode($data_token, $this->key);
 
+        return response()->json([
+            "token" => $token
+        ], 201);
+        
     }
 
     /**
